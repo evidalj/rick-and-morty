@@ -90,7 +90,8 @@ const Home = () => {
                 </Grid>
 
             </Grid>
-            <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />
+            {characterDetail && <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />}
+
         </Container>
     );
 }
