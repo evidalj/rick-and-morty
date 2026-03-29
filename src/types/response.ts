@@ -9,6 +9,7 @@ export type info = {
 type response = {
     info: info;
     results: Array<any | character>
+    error?: string
 }
 
 export default response;

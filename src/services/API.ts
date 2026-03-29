@@ -1,5 +1,5 @@
-import { axiosConfig } from "./axios-config";
-import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axiosConfig from "./axios-config";
+import { AxiosInstance, AxiosResponse } from 'axios';
 
 
 class API {
@@ -7,17 +7,18 @@ class API {
 
     private async post(uri: string, data: any): Promise<AxiosResponse> {
         try {
-            return this.axios.post(uri, data);
+            return await this.axios.post(uri, data);
         } catch (error: any) {
             return error;
         }
     };
 
-    public async get(uri: string, params: any): Promise<AxiosResponse> {
+    public async get<T>(uri: string, params: any): Promise<T> {
         try {
-            return this.axios.get(`${uri}${params}`);
+            // @ts-ignore
+            return await this.axios.get<T>(`${uri}${params}`);
         } catch (error: any) {
-            return error;
+            throw new Error("Error fetching data");
         }
     }
 }

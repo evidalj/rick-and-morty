@@ -38,6 +38,7 @@ const Home = () => {
     const onSearch = async () => {
         const params: string = `?name=${name}&page=${1}`;
         const response: response = await character.getByname(params);
+        console.log('response on search',response);
         setCharacteres(response.results);
         setInfo(response.info);
         setPage(1);
