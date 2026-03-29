@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@mui/material";
 import { Container, Grid } from "@mui/material";
 import SearchField from "./components/SearchField";
 import Character from "../../services/character/character";
@@ -44,6 +43,11 @@ const Home = () => {
         setPage(1);
     }
 
+    const onCleanText = () => {
+        setName("");
+        allCharacteres();
+    }
+
     const allCharacteres = async () => {
         const response: response = await character.getAll();
         setCharacteres(response.results);
@@ -71,12 +75,14 @@ const Home = () => {
     }, []);
     return (
         <Container>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} sx={{ mt: 2 }}>
                 <Grid item xs={12}>
-                    <SearchField text={name} onChangeText={onChangeName} />
-                </Grid>
-                <Grid item xs={12}>
-                    <Button onClick={onSearch} variant="contained" color="primary">Buscar</Button>
+                    <SearchField
+                        text={name}
+                        onChangeText={onChangeName}
+                        handleSearch={onSearch}
+                        handleClean={onCleanText}
+                    />
                 </Grid>
                 {
                     characteres.length > 0 ? characteres.map((character: character, index: number) => (
@@ -91,7 +97,6 @@ const Home = () => {
 
             </Grid>
             {characterDetail && <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />}
-
         </Container>
     );
 }
