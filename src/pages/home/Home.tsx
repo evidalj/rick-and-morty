@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Paper } from "@mui/material";
 import SearchField from "./components/SearchField";
 import Character from "../../services/character/character";
 import response, { info } from "../../types/response";
@@ -38,7 +38,7 @@ const Home = () => {
     const onSearch = async () => {
         const params: string = `?name=${name}&page=${1}`;
         const response: response = await character.getByname(params);
-        console.log('response on search',response);
+        console.log('response on search', response);
         setCharacteres(response.results);
         setInfo(response.info);
         setPage(1);
@@ -76,7 +76,7 @@ const Home = () => {
     }, []);
     return (
         <Container>
-            <Grid container spacing={1} sx={{ mt: 2 }}>
+            <Grid container spacing={1} sx={{ mt: 2, background: '' }}>
                 <Grid item xs={12}>
                     <SearchField
                         text={name}
@@ -95,7 +95,6 @@ const Home = () => {
                 <Grid item xs={12}>
                     <Paginator page={page} count={info.pages} onChangePage={onChangePage} />
                 </Grid>
-
             </Grid>
             {characterDetail && <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />}
         </Container>

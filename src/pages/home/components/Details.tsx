@@ -14,7 +14,6 @@ const Details = (props: Props) => {
 	return (
 		<CardActionArea onClick={onActionArea}>
 			<Card sx={{ display: "flex" }}>
-
 				<CardMedia
 					component="img"
 					sx={{ width: 150 }}
@@ -30,9 +29,6 @@ const Details = (props: Props) => {
 							{`${character.species} - ${character.status}`}
 						</Typography>
 					</CardContent>
-					<Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-					</Box>
 				</Box>
 			</Card >
 		</CardActionArea>
