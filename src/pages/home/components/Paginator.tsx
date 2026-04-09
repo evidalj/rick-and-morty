@@ -9,7 +9,7 @@ const Paginator = (props: Props) => {
     const { page, onChangePage, count } = props;
     return (
         <Stack spacing={1} alignItems={"center"}>
-            <Pagination count={count} page={page} onChange={onChangePage} />
+            <Pagination color="primary" count={count} page={page} onChange={onChangePage} />
         </Stack>
     )
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Container, Grid, Paper } from "@mui/material";
+import { AppBar, Box, Container, Grid, Paper, Toolbar } from "@mui/material";
 import SearchField from "./components/SearchField";
 import Character from "../../services/character/character";
 import response, { info } from "../../types/response";
@@ -7,6 +7,7 @@ import character from "../../types/character";
 import Details from "./components/Details";
 import Paginator from "./components/Paginator";
 import InformationDetails from "./components/InformationDetails";
+import Bar from "./components/bar/Bar";
 const Home = () => {
     const [name, setName] = useState<string>("");
     const [characteres, setCharacteres] = useState<Array<character>>([]);
@@ -75,29 +76,34 @@ const Home = () => {
         allCharacteres();
     }, []);
     return (
-        <Container>
-            <Grid container spacing={1} sx={{ mt: 2, background: '' }}>
-                <Grid item xs={12}>
-                    <SearchField
-                        text={name}
-                        onChangeText={onChangeName}
-                        handleSearch={onSearch}
-                        handleClean={onCleanText}
-                    />
-                </Grid>
-                {
-                    characteres.length > 0 ? characteres.map((character: character, index: number) => (
-                        <Grid item xs={12} md={6} lg={4} key={index}>
-                            <Details character={character} onClick={onInformationDetail} />
+        <>
+            <Bar />
+            <Box component={'main'} sx={{ p: 3, mt: 6 }}>
+                <Container>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                            <SearchField
+                                text={name}
+                                onChangeText={onChangeName}
+                                handleSearch={onSearch}
+                                handleClean={onCleanText}
+                            />
                         </Grid>
-                    )) : "No data found"
-                }
-                <Grid item xs={12}>
-                    <Paginator page={page} count={info.pages} onChangePage={onChangePage} />
-                </Grid>
-            </Grid>
-            {characterDetail && <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />}
-        </Container>
+                        {
+                            characteres.length > 0 ? characteres.map((character: character, index: number) => (
+                                <Grid item xs={12} md={6} lg={4} key={index}>
+                                    <Details character={character} onClick={onInformationDetail} />
+                                </Grid>
+                            )) : "No data found"
+                        }
+                        <Grid item xs={12}>
+                            <Paginator page={page} count={info.pages} onChangePage={onChangePage} />
+                        </Grid>
+                    </Grid>
+                    {characterDetail && <InformationDetails character={characterDetail} open={isOpenDetail} onClose={onCloseDetails} />}
+                </Container>
+            </Box>
+        </>
     );
 }
 export default Home;
